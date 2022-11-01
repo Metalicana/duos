@@ -39,8 +39,10 @@
 
 void kmain(void)
 {
-	__sys_init();
 	
+	__sys_init();
+	__asm volatile ("SVC #0x4");
+	kprintf("wow ok");
 
 //uint32_t b=0;
 // float x=50.59;

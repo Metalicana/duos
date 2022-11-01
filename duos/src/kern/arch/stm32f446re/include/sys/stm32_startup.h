@@ -31,6 +31,8 @@
 #ifndef __STM32_STARTUP_H
 #define __STM32_STARTUP_H
 #include <stdint.h>
+#include <usart.h>
+#include <stm32_peps.h>
 
 #define SRAM_START 0x20000000U
 #define SRAM_SIZE (128*1024) //128KB
@@ -50,6 +52,14 @@ extern uint32_t _la_data;
 volatile uint32_t _bss_size=0;
 volatile uint32_t _data_size=0;
 volatile uint32_t _text_size=0;
+
+
+//new method testing
+
+void SVC_Handler_Main( unsigned int *svc_args );
+
+
+
 
 void Reset_Handler(void) __attribute__((weak));
 void NMI_Handler(void) __attribute__((weak, alias("Default_Handler")));

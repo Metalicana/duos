@@ -72,9 +72,70 @@ void BusFault_Handler(void)
 void SVCall_Handler(void){
 /* Write code for SVC handler */
 /* the handler function evntually call syscall function with a call number */
-//TODO We gotta implement this 
+//TODO We gotta implement this
+__asm(
+    ".global SVC_Handler_Main\n"
+    "TST lr, #4\n"
+    "ITE EQ\n"
+    "MRSEQ r0, MSP\n"
+    "MRSNE r0, PSP\n"
+	"B SVC_Handler_Main\n"
+	"ALIGN 4\n"
+  ) ;
+  
 
 
+}
+void SVC_Handler_Main( unsigned int *svc_args )
+{
+  unsigned int svc_number;
+
+  /*
+  * Stack contains:
+  * r0, r1, r2, r3, r12, r14, the return address and xPSR
+  * First argument (r0) is svc_args[0]
+  */
+  
+  svc_number = ( ( char * )svc_args[ 6 ] )[ -2 ] ;
+  switch(svc_number)
+  {
+	case 0:
+		_USART_WRITE(USART2,(uint8_t*)"OOOOOOOOOOOOF\n\r");
+		break;
+	case 2:
+		_USART_WRITE(USART2,(uint8_t*)"2\n\r");
+		break;
+	case 3:
+		_USART_WRITE(USART2,(uint8_t*)"3\n\r");
+		break;
+	case 4:
+		_USART_WRITE(USART2,(uint8_t*)"4\n\r");
+		break;
+	case 5:
+		_USART_WRITE(USART2,(uint8_t*)"5\n\r");
+		break;
+	case 6:
+		_USART_WRITE(USART2,(uint8_t*)"6\n\r");
+		break;
+	case 7:
+		_USART_WRITE(USART2,(uint8_t*)"7\n\r");
+		break;
+	case 8:
+		_USART_WRITE(USART2,(uint8_t*)"8\n\r");
+		break;
+	
+  }
+  switch( svc_number )
+  {
+    case 0:  /* EnablePrivilegedMode */
+      
+      break;
+	case 1:
+		_USART_WRITE(USART2,(uint8_t*)"heeheee\n\r");
+		break;
+    default:    /* unknown SVC */
+      break;
+  }
 }
 
 

@@ -45,10 +45,10 @@ void __sys_init(void)
 	kprintf("Booting DUOS .....\r\n");
 	kprintf("Copyright (c) 2022, CSE, DU\r\n");
 	kprintf("Credit: Third Year 2022\r\n");
-	kprintf("CPUID %x\n", SCB->CPUID);
-	kprintf("OS Version: 1.0\n");
-	kprintf("Time Elapse %d ms\n",__getTime());
+	kprintf("CPUID %x\n\r", SCB->CPUID);
+	kprintf("OS Version: 1.0\n\r");
+	kprintf("Time Elapse %d ms\n\r",__getTime());
 	kprintf("Wellcome ....\r\n");
 	kprintf("*************************************\r\n");
-	kprintf("# ");
+	kprintf("# \r\n");
 }
