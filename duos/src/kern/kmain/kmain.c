@@ -39,18 +39,19 @@
 
 void kmain(void)
 {
-__sys_init();
+	__sys_init();
+	
 
 //uint32_t b=0;
-float x=50.59;
-uint8_t y=23,f=56;
-x++;
-kprintf("%d %d %f\n",y,f,x);
-kprintf("After Input\n");
-//uint8_t p[8]="1234.34\0";
-//x=str2float(p);
-kprintf("After Input\n");
-kprintf("Time Elapse %d ms\n",__getTime());
+// float x=50.59;
+// uint8_t y=23,f=56;
+// x++;
+// kprintf("%d %d %f\n",y,f,x);
+// kprintf("After Input\n");
+// //uint8_t p[8]="1234.34\0";
+// //x=str2float(p);
+// kprintf("After Input\n");
+// kprintf("Time Elapse %d ms\n",__getTime());
 while(1){
 //	kprintf((uint8_t*)"%d",(uint8_t*)a);
 //	kscanf((uint8_t*)"%d",(uint8_t*)b);
