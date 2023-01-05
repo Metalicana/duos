@@ -43,4 +43,18 @@ void __sys_write(unsigned int fd, char *str)
         break;
     }
 }
+void __sys_read(unsigned int fd, char** str)
+{
+    char ch[100];
+    switch (fd)
+    {
+        case STDIN_FILENO:
+            _USART_READ(USART2, (char*)ch, 1000);
+            *str = ch;
+            break;
+    
+        default:
+            break;
+    }
+}
 

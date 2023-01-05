@@ -43,7 +43,18 @@ void syscall(unsigned int *args)
 	{
 		/* Write your code to call actual function (kunistd.h/c or times.h/c and handle the return value(s) */
 		case SYS_read: 
-			break;
+			{
+				char *toRead;
+				//we need to send pointer or pointer
+				//so that we can use the first char pointer as our string to write
+				__sys_read(0,&toRead);
+				//get arguments
+				unsigned int string_add = args[18];
+
+				*((char**)string_add) = toRead;
+				break;
+			}
+			
 		case SYS_write:
 			{
 				unsigned int string_add = args[18];

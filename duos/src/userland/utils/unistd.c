@@ -44,3 +44,33 @@ void ok(char* args)
         "ldmia r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
     );
 }
+
+void write(char* args)
+{
+    __asm volatile("mov r5, %[v]": : [v] "r" (args));
+    __asm volatile("stmdb r13!, {r5}");
+    __asm volatile (
+        // "nop\n"
+        "stmdb r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+        "svc 55\n"
+        "nop\n"
+        // "blx lr\n"
+        "ldmia r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+    );
+}
+void read(char **args)
+{
+    char *get = "temp";
+
+    __asm volatile("mov r5, %[v]": : [v] "r" (&get));
+    __asm volatile("stmdb r13!, {r5}");
+
+    __asm volatile (
+        "stmdb r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+        "svc 50\n"
+        "nop\n"
+        "ldmia r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+    );
+
+    (*args) = get;
+}

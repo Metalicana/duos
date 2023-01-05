@@ -33,4 +33,7 @@
 /* Basic input and output function */
 
 void ok(char* args);
+void write(char* args);
+void read(char **args);
+
 #endif

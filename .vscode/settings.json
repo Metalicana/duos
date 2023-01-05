@@ -2,6 +2,7 @@
     "files.associations": {
         "gpio.h": "c",
         "ustdio.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "kunistd.h": "c"
     }
 }
