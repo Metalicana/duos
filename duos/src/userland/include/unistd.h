@@ -32,4 +32,5 @@
 #define __UNISTD_H
 /* Basic input and output function */
 
+void ok(char* args);
 #endif

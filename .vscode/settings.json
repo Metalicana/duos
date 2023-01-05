@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "gpio.h": "c",
+        "ustdio.h": "c",
+        "unistd.h": "c"
+    }
+}

@@ -56,7 +56,7 @@ volatile uint32_t _text_size=0;
 
 //new method testing
 
-void SVC_Handler_Main( unsigned int *svc_args );
+
 
 
 

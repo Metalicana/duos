@@ -31,3 +31,16 @@
 #include <unistd.h>
 /* Write your highlevel I/O details */
 
+void ok(char* args)
+{
+    __asm volatile("mov r5, %[v]": : [v] "r" (args));
+    __asm volatile("stmdb r13!, {r5}");
+    __asm volatile (
+        // "nop\n"
+        "stmdb r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+        "svc 55\n"
+        "nop\n"
+        // "blx lr\n"
+        "ldmia r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+    );
+}

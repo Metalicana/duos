@@ -32,17 +32,25 @@
 #include <syscall_def.h>
 #include <errno.h>
 #include <errmsg.h>
-void syscall(uint16_t callno)
+#include <kunistd.h>
+void syscall(unsigned int *args)
 {
+	unsigned int svc_number;
+	svc_number = ((char *) args[6])[-2];
 /* The SVC_Handler calls this function to evaluate and execute the actual function */
 /* Take care of return value or code */
-	switch(callno)
+	switch(svc_number)
 	{
 		/* Write your code to call actual function (kunistd.h/c or times.h/c and handle the return value(s) */
 		case SYS_read: 
 			break;
 		case SYS_write:
-			break;
+			{
+				unsigned int string_add = args[18];
+				char *ch = string_add;
+				__sys_write(STDOUT_FILENO, ch);
+				break;
+			}
 		case SYS_reboot:
 			break;	
 		case SYS__exit:

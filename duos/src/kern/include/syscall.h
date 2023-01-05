@@ -31,6 +31,6 @@
 #ifndef _SYSCALL_H
 #define _SYSCALL_H
 #include <stdint.h>
-void syscall(uint16_t);
+void syscall(unsigned int *args);
 #endif
 

@@ -28,5 +28,19 @@
  * SUCH DAMAGE.
  */
 #include <kunistd.h>
+#include <usart.h>
 /* Add your functions here */
+void __sys_write(unsigned int fd, char *str)
+{
+    switch (fd)
+    {
+    case STDOUT_FILENO:
+        
+        _USART_WRITE(USART2, str);
+        break;
+    
+    default:
+        break;
+    }
+}
 

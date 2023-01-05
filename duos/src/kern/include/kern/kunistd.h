@@ -34,5 +34,7 @@
 #define STDIN_FILENO  0      /* Standard input */
 #define STDOUT_FILENO 1      /* Standard output */
 #define STDERR_FILENO 2      /* Standard error */
+
+void __sys_write(unsigned int fd, char *str);
 #endif /* KERN_UNISTD_H */
 

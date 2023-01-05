@@ -35,14 +35,32 @@
 #include <kstring.h>
 #include <stdint.h>
 #include <usart.h>
+#include<ustdio.h>
+#include <./../../userland/main.c>
 //#include "../include/float.h"
 
 void kmain(void)
 {
 	
 	__sys_init();
-	__asm volatile ("SVC #0x4");
-	kprintf("wow ok");
+
+	unsigned int empty[256];
+    for(int i = 0; i < 256; i++) empty[i] = 0;
+
+    // kprintf("Inside Read : %s\n", ch);
+    
+    task_init_env_2(empty+256);
+
+    __asm volatile (
+        ".global task_init_env_2\n"
+        "task_init_env_2:\n"
+	        "msr psp, r0\n"
+	        "mov r0, #3\n"
+	        "msr control, r0\n"
+	        "isb\n"
+    );
+
+    main();
 
 //uint32_t b=0;
 // float x=50.59;
