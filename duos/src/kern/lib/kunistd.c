@@ -29,6 +29,7 @@
  */
 #include <kunistd.h>
 #include <usart.h>
+#include <cm4.h>
 /* Add your functions here */
 void __sys_write(unsigned int fd, char *str)
 {
@@ -58,3 +59,20 @@ void __sys_read(unsigned int fd, char** str)
     }
 }
 
+void __sys_reboot(void) 
+{
+	kprintf("CSEDU OS rebooting...");
+    //2nd bit is SYS RESET REQUEST
+	SCB->AIRCR = (0x05FA << 16) | (1 << 2);
+
+	while(1);
+}
+void __sys_gettime(void)
+{
+    unsigned int *t;
+	__asm volatile ("mov %0, R4" : "=r" (t));
+    //save value of t's address into R4
+    //get the time from the given cm4 in starter code
+	*t = __getTime();
+	return;
+}

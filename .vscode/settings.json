@@ -3,6 +3,7 @@
         "gpio.h": "c",
         "ustdio.h": "c",
         "unistd.h": "c",
-        "kunistd.h": "c"
+        "kunistd.h": "c",
+        "usart.h": "c"
     }
 }

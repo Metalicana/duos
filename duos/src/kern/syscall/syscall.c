@@ -33,6 +33,7 @@
 #include <errno.h>
 #include <errmsg.h>
 #include <kunistd.h>
+#include <cm4.h>
 void syscall(unsigned int *args)
 {
 	unsigned int svc_number;
@@ -63,12 +64,14 @@ void syscall(unsigned int *args)
 				break;
 			}
 		case SYS_reboot:
+			__sys_reboot();
 			break;	
 		case SYS__exit:
 			break;
 		case SYS_getpid:
 			break;
 		case SYS___time:
+			__sys_gettime();
 			break;
 		case SYS_yield:
 			break;				

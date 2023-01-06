@@ -35,5 +35,7 @@
 void ok(char* args);
 void write(char* args);
 void read(char **args);
+int get_time();
+void reboot();
 
 #endif

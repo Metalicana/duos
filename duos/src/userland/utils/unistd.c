@@ -74,3 +74,16 @@ void read(char **args)
 
     (*args) = get;
 }
+
+void reboot()
+{
+    __asm volatile("svc 119");
+}
+
+int get_time()
+{
+    unsigned int t;
+    __asm volatile ("mov R4, %0" : : "r" (&t));
+    __asm volatile ("svc 113");
+    return (int)t;
+}
