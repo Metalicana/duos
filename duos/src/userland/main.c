@@ -40,9 +40,8 @@ void main()
         else break;
     }
     //TODO gettime
-    var1 = get_time();
-    uprintf("Time is %d\r\n",var1);
-
+    //var1 = get_time();
+    uprintf("Time is %d \r\n",get_time());
 
     kprintf("out of main\r\n");
     while(1);

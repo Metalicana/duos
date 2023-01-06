@@ -4,6 +4,7 @@
         "ustdio.h": "c",
         "unistd.h": "c",
         "kunistd.h": "c",
-        "usart.h": "c"
+        "usart.h": "c",
+        "cm4.h": "c"
     }
 }

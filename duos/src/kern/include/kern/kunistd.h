@@ -38,6 +38,6 @@
 void __sys_write(unsigned int fd, char *str);
 void __sys_read(unsigned int fd, char** str);
 void __sys_reboot(void);
-void __sys_gettime(void);
+void __sys_gettime(unsigned int *val);
 #endif /* KERN_UNISTD_H */
 

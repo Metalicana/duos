@@ -71,13 +71,18 @@ void syscall(unsigned int *args)
 		case SYS_getpid:
 			break;
 		case SYS___time:
-			__sys_gettime();
+		{
+			unsigned int time_add = args[18];
+			__sys_gettime((unsigned int *)time_add);
+		
 			break;
+		}
 		case SYS_yield:
 			break;				
 		/* return error code see error.h and errmsg.h ENOSYS sys_errlist[ENOSYS]*/	
 		default: ;
 	}
+
 /* Handle SVC return here */
 }
 

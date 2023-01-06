@@ -67,12 +67,12 @@ void __sys_reboot(void)
 
 	while(1);
 }
-void __sys_gettime(void)
+void __sys_gettime(unsigned int *val)
 {
-    unsigned int *t;
-	__asm volatile ("mov %0, R4" : "=r" (t));
+
+	//__asm volatile ("mov %0, r2" : "=r" (t));
     //save value of t's address into R4
     //get the time from the given cm4 in starter code
-	*t = __getTime();
+	*val = __getTime();
 	return;
 }

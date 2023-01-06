@@ -83,7 +83,15 @@ void reboot()
 int get_time()
 {
     unsigned int t;
-    __asm volatile ("mov R4, %0" : : "r" (&t));
-    __asm volatile ("svc 113");
+    __asm volatile("mov r5, %[v]": : [v] "r" (&t));
+    __asm volatile("stmdb r13!, {r5}");
+    __asm volatile (
+        "stmdb r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+        "svc 113\n"
+        "nop\n"
+        "ldmia r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+    );
+    
+
     return (int)t;
 }

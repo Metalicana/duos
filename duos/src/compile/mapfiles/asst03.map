@@ -28,7 +28,7 @@ LOAD object/syscall.o
 LOAD object/ustring.o
 LOAD object/ustdio.o
 
-.text           0x08000000     0x2364
+.text           0x08000000     0x2228
                 0x08000000                _stext = .
  *(.isr_vector)
  .isr_vector    0x08000000      0x1c4 object/stm32_startup.o
@@ -59,183 +59,184 @@ LOAD object/ustdio.o
                 0x0800088e                convert
                 0x080008e8                float2str
                 0x080009b4                str2float
- .text          0x08000aac      0x11c object/kmain.o
+ .text          0x08000aac       0x94 object/kmain.o
                 0x08000aac                main
-                0x08000b6c                kmain
-                0x08000bb0                task_init_env_2
- .text          0x08000bc8       0xf0 object/stm32_startup.o
-                0x08000bc8                Reset_Handler
-                0x08000c80                FLASH_Handler
-                0x08000c80                SPI4_Handler
-                0x08000c80                DMA2_Stream7_Handler
-                0x08000c80                OTG_HS_Handler
-                0x08000c80                OTG_FS_WKUP_Handler
-                0x08000c80                DMA2_Stream3_Handler
-                0x08000c80                USART3_Handler
-                0x08000c80                PendSV_Handler
-                0x08000c80                NMI_Handler
-                0x08000c80                SAI1_Handler
-                0x08000c80                TIM6_DAC_Handler
-                0x08000c80                CAN1_RX1_Handler
-                0x08000c80                EXTI15_10_Handler
-                0x08000c80                ADC_Handler
-                0x08000c80                I2C1_EV_Handler
-                0x08000c80                TAMP_STAMP_Handler
-                0x08000c80                I2C3_ER_Handler
-                0x08000c80                WWDG_Handler
-                0x08000c80                EXTI4_Handler
-                0x08000c80                I2C3_EV_Handler
-                0x08000c80                DMA1_Stream1_Handler
-                0x08000c80                DMA2_Stream4_Handler
-                0x08000c80                DMA1_Stream7_Handler
-                0x08000c80                OTG_FS_Handler
-                0x08000c80                TIM1_BRK_TIM9_Handler
-                0x08000c80                I2C1_ER_Handler
-                0x08000c80                DMA1_Stream3_Handler
-                0x08000c80                UsageFault_Handler
-                0x08000c80                TIM1_UP_TIM10_Handler
-                0x08000c80                CAN1_RX0_Handler
-                0x08000c80                TIM1_CC_Handler
-                0x08000c80                I2C2_ER_Handler
-                0x08000c80                USART6_Handler
-                0x08000c80                TIM8_CC_Handler
-                0x08000c80                HDMI_CEC_Handler
-                0x08000c80                SAI2_Handler
-                0x08000c80                CAN1_SCE_Handler
-                0x08000c80                DMA1_Stream0_Handler
-                0x08000c80                OTG_HS_EP1_OUT_Handler
-                0x08000c80                EXTI1_Handler
-                0x08000c80                RTC_WKUP_Handler
-                0x08000c80                FMC_Handler
-                0x08000c80                EXTI3_Handler
-                0x08000c80                EXTI2_Handler
-                0x08000c80                UART4_Handler
-                0x08000c80                CAN2_RX1_Handler
-                0x08000c80                EXTI9_5_Handler
-                0x08000c80                TIM2_Handler
-                0x08000c80                USART1_Handler
-                0x08000c80                CAN2_SCE_Handler
-                0x08000c80                TIM3_Handler
-                0x08000c80                DMA2_Stream6_Handler
-                0x08000c80                Default_Handler
-                0x08000c80                DCMI_Handler
-                0x08000c80                TIM1_TRG_COM_TIM11_Handler
-                0x08000c80                RTC_Alarm_Handler
-                0x08000c80                TIM4_Handler
-                0x08000c80                TIM8_UP_TIM13_Handler
-                0x08000c80                CAN2_TX_Handler
-                0x08000c80                SPI2_Handler
-                0x08000c80                DMA2_Stream1_Handler
-                0x08000c80                DMA1_Stream2_Handler
-                0x08000c80                OTG_HS_WKUP_Handler
-                0x08000c80                EXTI0_Handler
-                0x08000c80                TIM8_BRK_TIM12_Handler
-                0x08000c80                CAN2_RX0_Handler
-                0x08000c80                DMA2_Stream5_Handler
-                0x08000c80                DMA1_Stream6_Handler
-                0x08000c80                SDIO_Handler
-                0x08000c80                FMPI2C1_ERR_Handler
-                0x08000c80                USART2_Handler
-                0x08000c80                SPI1_Handler
-                0x08000c80                I2C2_EV_Handler
-                0x08000c80                SPDIF_Rx_Handler
-                0x08000c80                DMA2_Stream2_Handler
-                0x08000c80                SPI3_Handler
-                0x08000c80                DMA2_Stream0_Handler
-                0x08000c80                RCC_Handler
-                0x08000c80                PVD_Handler
-                0x08000c80                UART5_Handler
-                0x08000c80                DMA1_Stream5_Handler
-                0x08000c80                TIM5_Handler
-                0x08000c80                QuadSPI_Handler
-                0x08000c80                TIM7_Handler
-                0x08000c80                TIM8_TRG_COM_TIM14_Handler
-                0x08000c80                CAN1_TX_Handler
-                0x08000c80                FPU_Handler
-                0x08000c80                FMPI2C1_Handler
-                0x08000c80                DebugMonitor_Handler
-                0x08000c80                DMA1_Stream4_Handler
-                0x08000c80                OTG_HS_EP1_IN_Handler
-                0x08000c86                HardFault_Handler
-                0x08000c8c                MemManage_Handler
-                0x08000c92                BusFault_Handler
-                0x08000c98                SVCall_Handler
- .text          0x08000cb8       0xbc object/clock.o
-                0x08000cb8                DRV_CLOCK_INIT
- .text          0x08000d74      0x230 object/usart.o
-                0x08000d74                DRV_USART_INIT
-                0x08000e30                UART_SendChar
-                0x08000e5e                _USART_WRITE
-                0x08000e8c                _USART_READ
-                0x08000f04                UART_GetChar
-                0x08000f2e                _USART_READ_STR
- .text          0x08000fa4       0x20 object/gpio.o
-                0x08000fa4                DRV_GPIO_INIT
- .text          0x08000fc4        0xe object/timer.o
-                0x08000fc4                DRV_TIMER_INIT
- *fill*         0x08000fd2        0x2 
- .text          0x08000fd4      0x314 object/kstdio.o
-                0x08000fd4                kprintf
-                0x08001164                kscanf
- .text          0x080012e8       0xa4 object/sys_init.o
-                0x080012e8                __sys_init
- .text          0x0800138c       0xb4 object/unistd.o
-                0x0800138c                ok
-                0x080013b4                write
-                0x080013dc                read
-                0x08001414                reboot
-                0x08001424                get_time
- .text          0x08001440        0x0 object/times.o
- .text          0x08001440       0x9c object/kunistd.o
-                0x08001440                __sys_write
-                0x08001468                __sys_read
-                0x080014a0                __sys_reboot
-                0x080014c0                __sys_gettime
- .text          0x080014dc        0x0 object/ktimes.o
- .text          0x080014dc       0xa4 object/syscall.o
-                0x080014dc                syscall
- .text          0x08001580        0x0 object/ustring.o
- .text          0x08001580      0x4d4 object/ustdio.o
-                0x08001580                firstTest
-                0x08001596                uprintf
-                0x08001914                uscanf
+                0x08000ae4                kmain
+                0x08000b28                task_init_env_2
+ .text          0x08000b40       0xf0 object/stm32_startup.o
+                0x08000b40                Reset_Handler
+                0x08000bf8                FLASH_Handler
+                0x08000bf8                SPI4_Handler
+                0x08000bf8                DMA2_Stream7_Handler
+                0x08000bf8                OTG_HS_Handler
+                0x08000bf8                OTG_FS_WKUP_Handler
+                0x08000bf8                DMA2_Stream3_Handler
+                0x08000bf8                USART3_Handler
+                0x08000bf8                PendSV_Handler
+                0x08000bf8                NMI_Handler
+                0x08000bf8                SAI1_Handler
+                0x08000bf8                TIM6_DAC_Handler
+                0x08000bf8                CAN1_RX1_Handler
+                0x08000bf8                EXTI15_10_Handler
+                0x08000bf8                ADC_Handler
+                0x08000bf8                I2C1_EV_Handler
+                0x08000bf8                TAMP_STAMP_Handler
+                0x08000bf8                I2C3_ER_Handler
+                0x08000bf8                WWDG_Handler
+                0x08000bf8                EXTI4_Handler
+                0x08000bf8                I2C3_EV_Handler
+                0x08000bf8                DMA1_Stream1_Handler
+                0x08000bf8                DMA2_Stream4_Handler
+                0x08000bf8                DMA1_Stream7_Handler
+                0x08000bf8                OTG_FS_Handler
+                0x08000bf8                TIM1_BRK_TIM9_Handler
+                0x08000bf8                I2C1_ER_Handler
+                0x08000bf8                DMA1_Stream3_Handler
+                0x08000bf8                UsageFault_Handler
+                0x08000bf8                TIM1_UP_TIM10_Handler
+                0x08000bf8                CAN1_RX0_Handler
+                0x08000bf8                TIM1_CC_Handler
+                0x08000bf8                I2C2_ER_Handler
+                0x08000bf8                USART6_Handler
+                0x08000bf8                TIM8_CC_Handler
+                0x08000bf8                HDMI_CEC_Handler
+                0x08000bf8                SAI2_Handler
+                0x08000bf8                CAN1_SCE_Handler
+                0x08000bf8                DMA1_Stream0_Handler
+                0x08000bf8                OTG_HS_EP1_OUT_Handler
+                0x08000bf8                EXTI1_Handler
+                0x08000bf8                RTC_WKUP_Handler
+                0x08000bf8                FMC_Handler
+                0x08000bf8                EXTI3_Handler
+                0x08000bf8                EXTI2_Handler
+                0x08000bf8                UART4_Handler
+                0x08000bf8                CAN2_RX1_Handler
+                0x08000bf8                EXTI9_5_Handler
+                0x08000bf8                TIM2_Handler
+                0x08000bf8                USART1_Handler
+                0x08000bf8                CAN2_SCE_Handler
+                0x08000bf8                TIM3_Handler
+                0x08000bf8                DMA2_Stream6_Handler
+                0x08000bf8                Default_Handler
+                0x08000bf8                DCMI_Handler
+                0x08000bf8                TIM1_TRG_COM_TIM11_Handler
+                0x08000bf8                RTC_Alarm_Handler
+                0x08000bf8                TIM4_Handler
+                0x08000bf8                TIM8_UP_TIM13_Handler
+                0x08000bf8                CAN2_TX_Handler
+                0x08000bf8                SPI2_Handler
+                0x08000bf8                DMA2_Stream1_Handler
+                0x08000bf8                DMA1_Stream2_Handler
+                0x08000bf8                OTG_HS_WKUP_Handler
+                0x08000bf8                EXTI0_Handler
+                0x08000bf8                TIM8_BRK_TIM12_Handler
+                0x08000bf8                CAN2_RX0_Handler
+                0x08000bf8                DMA2_Stream5_Handler
+                0x08000bf8                DMA1_Stream6_Handler
+                0x08000bf8                SDIO_Handler
+                0x08000bf8                FMPI2C1_ERR_Handler
+                0x08000bf8                USART2_Handler
+                0x08000bf8                SPI1_Handler
+                0x08000bf8                I2C2_EV_Handler
+                0x08000bf8                SPDIF_Rx_Handler
+                0x08000bf8                DMA2_Stream2_Handler
+                0x08000bf8                SPI3_Handler
+                0x08000bf8                DMA2_Stream0_Handler
+                0x08000bf8                RCC_Handler
+                0x08000bf8                PVD_Handler
+                0x08000bf8                UART5_Handler
+                0x08000bf8                DMA1_Stream5_Handler
+                0x08000bf8                TIM5_Handler
+                0x08000bf8                QuadSPI_Handler
+                0x08000bf8                TIM7_Handler
+                0x08000bf8                TIM8_TRG_COM_TIM14_Handler
+                0x08000bf8                CAN1_TX_Handler
+                0x08000bf8                FPU_Handler
+                0x08000bf8                FMPI2C1_Handler
+                0x08000bf8                DebugMonitor_Handler
+                0x08000bf8                DMA1_Stream4_Handler
+                0x08000bf8                OTG_HS_EP1_IN_Handler
+                0x08000bfe                HardFault_Handler
+                0x08000c04                MemManage_Handler
+                0x08000c0a                BusFault_Handler
+                0x08000c10                SVCall_Handler
+ .text          0x08000c30       0xbc object/clock.o
+                0x08000c30                DRV_CLOCK_INIT
+ .text          0x08000cec      0x230 object/usart.o
+                0x08000cec                DRV_USART_INIT
+                0x08000da8                UART_SendChar
+                0x08000dd6                _USART_WRITE
+                0x08000e04                _USART_READ
+                0x08000e7c                UART_GetChar
+                0x08000ea6                _USART_READ_STR
+ .text          0x08000f1c       0x20 object/gpio.o
+                0x08000f1c                DRV_GPIO_INIT
+ .text          0x08000f3c        0xe object/timer.o
+                0x08000f3c                DRV_TIMER_INIT
+ *fill*         0x08000f4a        0x2 
+ .text          0x08000f4c      0x314 object/kstdio.o
+                0x08000f4c                kprintf
+                0x080010dc                kscanf
+ .text          0x08001260       0xa4 object/sys_init.o
+                0x08001260                __sys_init
+ .text          0x08001304       0xc0 object/unistd.o
+                0x08001304                ok
+                0x0800132c                write
+                0x08001354                read
+                0x0800138c                reboot
+                0x0800139c                get_time
+ .text          0x080013c4        0x0 object/times.o
+ .text          0x080013c4       0x9c object/kunistd.o
+                0x080013c4                __sys_write
+                0x080013ec                __sys_read
+                0x08001424                __sys_reboot
+                0x08001444                __sys_gettime
+ .text          0x08001460        0x0 object/ktimes.o
+ .text          0x08001460       0xae object/syscall.o
+                0x08001460                syscall
+ .text          0x0800150e        0x0 object/ustring.o
+ *fill*         0x0800150e        0x2 
+ .text          0x08001510      0x4d4 object/ustdio.o
+                0x08001510                firstTest
+                0x08001526                uprintf
+                0x080018a4                uscanf
  *(.rodata)
- .rodata        0x08001a54        0xa object/kstring.o
- *fill*         0x08001a5e        0x2 
- .rodata        0x08001a60       0xfa object/kmain.o
- *fill*         0x08001b5a        0x2 
- .rodata        0x08001b5c       0xed object/sys_init.o
- *fill*         0x08001c49        0x3 
- .rodata        0x08001c4c        0x5 object/unistd.o
- *fill*         0x08001c51        0x3 
- .rodata        0x08001c54       0x16 object/kunistd.o
- *fill*         0x08001c6a        0x2 
- .rodata        0x08001c6c      0x6f8 object/syscall.o
-                0x0800225c                sys_errlist
-                0x08002360                sys_nerr
-                0x08002364                . = ALIGN (0x4)
-                0x08002364                _etext = .
-                0x08002364                _la_data = LOADADDR (.data)
+ .rodata        0x080019e4        0xa object/kstring.o
+ *fill*         0x080019ee        0x2 
+ .rodata        0x080019f0       0x2e object/kmain.o
+ *fill*         0x08001a1e        0x2 
+ .rodata        0x08001a20       0xed object/sys_init.o
+ *fill*         0x08001b0d        0x3 
+ .rodata        0x08001b10        0x5 object/unistd.o
+ *fill*         0x08001b15        0x3 
+ .rodata        0x08001b18       0x16 object/kunistd.o
+ *fill*         0x08001b2e        0x2 
+ .rodata        0x08001b30      0x6f8 object/syscall.o
+                0x08002120                sys_errlist
+                0x08002224                sys_nerr
+                0x08002228                . = ALIGN (0x4)
+                0x08002228                _etext = .
+                0x08002228                _la_data = LOADADDR (.data)
 
-.glue_7         0x08002364        0x0
- .glue_7        0x08002364        0x0 linker stubs
+.glue_7         0x08002228        0x0
+ .glue_7        0x08002228        0x0 linker stubs
 
-.glue_7t        0x08002364        0x0
- .glue_7t       0x08002364        0x0 linker stubs
+.glue_7t        0x08002228        0x0
+ .glue_7t       0x08002228        0x0 linker stubs
 
-.vfp11_veneer   0x08002364        0x0
- .vfp11_veneer  0x08002364        0x0 linker stubs
+.vfp11_veneer   0x08002228        0x0
+ .vfp11_veneer  0x08002228        0x0 linker stubs
 
-.v4_bx          0x08002364        0x0
- .v4_bx         0x08002364        0x0 linker stubs
+.v4_bx          0x08002228        0x0
+ .v4_bx         0x08002228        0x0 linker stubs
 
-.iplt           0x08002364        0x0
- .iplt          0x08002364        0x0 object/cm4.o
+.iplt           0x08002228        0x0
+ .iplt          0x08002228        0x0 object/cm4.o
 
-.rel.dyn        0x08002364        0x0
- .rel.iplt      0x08002364        0x0 object/cm4.o
+.rel.dyn        0x08002228        0x0
+ .rel.iplt      0x08002228        0x0 object/cm4.o
 
-.data           0x20000000       0x28 load address 0x08002364
+.data           0x20000000       0x28 load address 0x08002228
                 0x20000000                _sdata = .
  *(.data)
  .data          0x20000000        0x0 object/kmath.o
@@ -261,10 +262,10 @@ LOAD object/ustdio.o
  *fill*         0x20000025        0x3 
                 0x20000028                _edata = .
 
-.igot.plt       0x20000028        0x0 load address 0x0800238c
+.igot.plt       0x20000028        0x0 load address 0x08002250
  .igot.plt      0x20000028        0x0 object/cm4.o
 
-.bss            0x20000028       0x44 load address 0x0800238c
+.bss            0x20000028       0x44 load address 0x08002250
                 0x20000028                _sbss = .
  *(.bss)
  .bss           0x20000028        0x0 object/kmath.o
