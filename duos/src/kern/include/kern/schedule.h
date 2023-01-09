@@ -30,6 +30,34 @@
  
 #ifndef __SCHEDULE_H
 #define __SCHEDULE_H
+#include <types.h>
+#include <schedule.h>
+#include <stdint.h>
+#include <cm4.h>
+#include <kmain.h>
+
+//TODO Create schedule method
+#define DUMMY_XPSR  0x01000000U
+
+#define READY 1
+#define RUNNING 2
+#define TERMINATED 3
+#define KILLED 4
+
+#define MAX_TASK 5
+
+
+void _schedule(void);
+//task related
+uint16_t generate_task_id(void);
+void create_task(TCB_TypeDef *tcb, void (*task_func)(void), uint32_t *stack);
+void start_task(void);
+
+// queue related operations
+void initialize_queue(void);
+void add_to_queue(TCB_TypeDef *t);
+TCB_TypeDef *pop(void);
+void set_sleeping_task(TCB_TypeDef *s);
 
 #endif
 

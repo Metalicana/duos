@@ -29,7 +29,9 @@
  */
  
 #include <stm32_startup.h>
-
+#include <types.h>
+#include <schedule.h>
+#define NUM_TASKS 5
 void Reset_Handler(void){
 	uint32_t size = (uint32_t)&_edata - (uint32_t)&_sdata;
 	uint8_t *pDst = (uint8_t*)&_sdata;
@@ -132,8 +134,11 @@ void SVCall_Handler(void) {
         "ITE EQ\n"
         "MRSEQ r0, MSP\n"
     	"MRSNE r0, PSP\n"
+		"MOV r1, r0\n"
 		"B syscall\n"
 	);
-
+	
 }
+
+//TODO implement pendsv handler here
 

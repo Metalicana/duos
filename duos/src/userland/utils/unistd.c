@@ -47,6 +47,7 @@ void ok(char* args)
 
 void write(char* args)
 {
+    kprintf("%s\n",args);
     __asm volatile("mov r5, %[v]": : [v] "r" (args));
     __asm volatile("stmdb r13!, {r5}");
     __asm volatile (
@@ -94,4 +95,34 @@ int get_time()
     
 
     return (int)t;
+}
+void yeild(void)
+{
+    __asm volatile("svc 120");
+}
+
+uint16_t getpid(void)
+{
+    unsigned int pid = 0;
+    __asm volatile("mov r5, %[v]": : [v] "r" (&pid));
+    __asm volatile("stmdb r13!, {r5}");
+    __asm volatile (
+        "stmdb r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+        "svc 5\n"
+        "nop\n"
+        "ldmia r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+    );
+    return (uint16_t) pid;
+}
+void exit(void)
+{
+    __asm volatile ("mov r12, r11");
+    __asm volatile("stmdb r13!, {r5}");
+    __asm volatile (
+        "stmdb r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+        "svc 3\n"
+        "nop\n"
+        "ldmia r13!, {r4, r5, r6, r7, r8, r9, r10, r11, ip, lr}\n"
+    );
+    yeild();
 }

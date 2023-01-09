@@ -43,28 +43,31 @@
 */
 typedef struct
 {
-volatile uint32_t CPUID; 	// CPUID Base Register 0x0
-volatile uint32_t ICSR;		// Interrupt Control and State Register 0x4
-volatile uint32_t VTOR;		// Vector Table Offset Register 0x8
-volatile uint32_t AIRCR;	// Application Interrupt and Reset Control Register 0xC
-volatile uint32_t SCR;		// System Control Register 0x10
-volatile uint32_t CCR;		// Configuration and Control Register 0x14
-volatile uint8_t SHPR[12]; 	// Exception priority setting for system exceptions
-volatile uint32_t SHCSR;	// System Handler Control and State Register 0x24
-volatile uint32_t CFSR;		// Configurable Fault Status Register combined of MemManage, Fault Status Register, BusFault Status Register, UsageFault Status Register 0x28
-volatile uint32_t HFSR;		// HardFault Status Register 0x2C
-volatile uint32_t DFSR;		// Hint information for causes of debug events
-volatile uint32_t MMFAR;	// MemManage Fault Address Register 0x34
-volatile uint32_t BFAR;		// BusFault Address Register 0x38
-volatile uint32_t AFSR;		// Auxiliary Fault Status Register 0x3C: Information for device-specific fault status
-volatile uint32_t PFR[2]; 	// Read only information on available processor features
-volatile uint32_t DFR;		// Debug Feature: Read only information on available debug features
-volatile uint32_t AFR;		// Auxiliary Feature: Read only information on available auxiliary features
-volatile uint32_t MMFR[4]; 	// Memory Model	Feature Registers: Read only information
-volatile uint32_t ISAR[5]; 	// Instruction Set Attributes Register: Register Read only information
-uint32_t RESERVED1[5];		// Now it is reserved: Unknown 	
-volatile uint32_t CPACR; 	// Coprocessor access control register 0x88
+  volatile uint32_t CPUID; 	// CPUID Base Register 0x0
+  volatile uint32_t ICSR;		// Interrupt Control and State Register 0x4
+  volatile uint32_t VTOR;		// Vector Table Offset Register 0x8
+  volatile uint32_t AIRCR;	// Application Interrupt and Reset Control Register 0xC
+  volatile uint32_t SCR;		// System Control Register 0x10
+  volatile uint32_t CCR;		// Configuration and Control Register 0x14
+  volatile uint32_t SHPR1; 	// Exception priority setting for system exceptions
+  volatile uint32_t SHPR2; 
+  volatile uint32_t SHPR3; 
+  volatile uint32_t SHCSR;	// System Handler Control and State Register 0x24
+  volatile uint32_t CFSR;		// Configurable Fault Status Register combined of MemManage, Fault Status Register, BusFault Status Register, UsageFault Status Register 0x28
+  volatile uint32_t HFSR;		// HardFault Status Register 0x2C
+  volatile uint32_t DFSR;		// Hint information for causes of debug events
+  volatile uint32_t MMFAR;	// MemManage Fault Address Register 0x34
+  volatile uint32_t BFAR;		// BusFault Address Register 0x38
+  volatile uint32_t AFSR;		// Auxiliary Fault Status Register 0x3C: Information for device-specific fault status
+  volatile uint32_t PFR[2]; 	// Read only information on available processor features
+  volatile uint32_t DFR;		// Debug Feature: Read only information on available debug features
+  volatile uint32_t AFR;		// Auxiliary Feature: Read only information on available auxiliary features
+  volatile uint32_t MMFR[4]; 	// Memory Model	Feature Registers: Read only information
+  volatile uint32_t ISAR[5]; 	// Instruction Set Attributes Register: Register Read only information
+  uint32_t RESERVED1[5];		// Now it is reserved: Unknown 	
+  volatile uint32_t CPACR; 	// Coprocessor access control register 0x88
 } SCB_TypeDef;
+/*
 /*
 * SysTick Data Structure
 */
@@ -214,5 +217,30 @@ __attribute__((weak)) uint32_t __getTime(void);
 /**
 * Functions on FPU
 **/
+
+void SetPriorityGroup(uint32_t group);
+
+void __NVIC_SetPriority (IRQn_TypeDef IRQn, uint32_t priority); /*!< Sets priority                                           */  
+uint32_t __NVIC_GetPriority(IRQn_TypeDef IRQn);                 /*!< Gets priority                                           */    
+void __NVIC_EnableIRQn(IRQn_TypeDef IRQn);                      /*!< Enables interrupt                                       */  
+void __NVIC_DisableIRQn(IRQn_TypeDef IRQn);                     /*!< Disables interrupt                                      */  
+uint32_t __NVIC_GetActive (IRQn_TypeDef IRQn);                  /*!< Returns the pending status of an interrupt              */ 
+uint32_t __get_pending_IRQn(IRQn_TypeDef IRQn);                 /*!< Returns active status of the interrupt                  */ 
+void __clear_pending_IRQn(IRQn_TypeDef IRQn);                   /*!< Clear interrupt pending bit                             */
+void __set_pending_IRQn(IRQn_TypeDef IRQn);
+void __disable_irq();                    /*!< Masks all interrupts (except NMI, HardFault)            */
+void __enable_irq();                     /*!< Enables / Unmasks all interrupts (except NMI, HardFault)*/
+uint32_t __get_BASEPRI(void);
+void __set_BASEPRI(uint32_t value);      /*!< Masks interrupts with priority level >= value           */
+void __unset_BASEPRI(uint32_t value);    /*!< Unmasks interrupts with priority level >= value         */
+void __set_PRIMASK(uint32_t priMask);    //Prevent all interrupt without non-maskable interrupt and hardfault.
+uint32_t __get_PRIMASK(void);            //Return value of the PRIMASK register
+void __enable_fault_irq(void);           //Enable all interrupt including FaultMask.
+void __set_FAULTMASK(uint32_t faultMask);//Prevent all interrupt without non-maskable interrupt
+void __enable_fault_irq(void);           //Enable all interrupt including FaultMask
+void __disable_fault_irq(void);          //Disable or prevent all interrupt including FaultMask
+uint32_t __get_FAULTMASK(void);          //Return the status of the masking value of FaultMask register
+
 void __enable_fpu(void);
+void set_task_pending(int value);
 #endif

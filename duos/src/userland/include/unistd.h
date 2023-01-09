@@ -30,6 +30,12 @@
  
 #ifndef __UNISTD_H
 #define __UNISTD_H
+#include <kunistd.h>
+#include <kstdio.h>
+#include <stm32_peps.h>
+#include <usart.h>
+#include <kstring.h>
+#include <types.h>
 /* Basic input and output function */
 
 void ok(char* args);
@@ -37,5 +43,10 @@ void write(char* args);
 void read(char **args);
 int get_time();
 void reboot();
+void exit(void);
+void yield(void);
+
+uint16_t getpid(void);
+
 
 #endif

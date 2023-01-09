@@ -30,6 +30,7 @@
 
 #ifndef __KERN_UNISTD_H
 #define __KERN_UNISTD_H
+#include <stdint.h>
 /* Constants for read/write/etc: special file handles */
 #define STDIN_FILENO  0      /* Standard input */
 #define STDOUT_FILENO 1      /* Standard output */
@@ -39,5 +40,6 @@ void __sys_write(unsigned int fd, char *str);
 void __sys_read(unsigned int fd, char** str);
 void __sys_reboot(void);
 void __sys_gettime(unsigned int *val);
+void __sys_getpid(unsigned int *val,uint16_t value);
 #endif /* KERN_UNISTD_H */
 

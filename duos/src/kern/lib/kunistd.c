@@ -29,6 +29,8 @@
  */
 #include <kunistd.h>
 #include <usart.h>
+#include <types.h>
+#include<kstdio.h>
 #include <cm4.h>
 /* Add your functions here */
 void __sys_write(unsigned int fd, char *str)
@@ -76,3 +78,20 @@ void __sys_gettime(unsigned int *val)
 	*val = __getTime();
 	return;
 }
+
+void __sys_getpid(unsigned int *val,uint16_t value)
+{
+	*val = value;
+	return ;
+}
+void __sys_exit(void)
+{
+    //TODO
+    unsigned int *svc_args;
+    __asm volatile("mov %0, r1" : "=r"(svc_args));
+    //Save args pointer into r1
+    //assign the task status as exit
+    (*((TCB_TypeDef*)svc_args[4])).status = 4;
+    return;
+}
+

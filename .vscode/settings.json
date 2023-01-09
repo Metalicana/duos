@@ -5,6 +5,14 @@
         "unistd.h": "c",
         "kunistd.h": "c",
         "usart.h": "c",
-        "cm4.h": "c"
+        "cm4.h": "c",
+        "syscall.h": "c",
+        "stm32_startup.h": "c",
+        "kstdio.h": "c",
+        "sys_init.h": "c",
+        "kmain.h": "c",
+        "kstring.h": "c",
+        "schedule.h": "c",
+        "types.h": "c"
     }
 }

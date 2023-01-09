@@ -34,12 +34,46 @@
 #include <errmsg.h>
 #include <kunistd.h>
 #include <cm4.h>
+#include <types.h>
+void __sys_start_task(uint32_t task_psp)
+{
+	//__asm volatile ("POP {LR}");
+
+	// unsigned int * svc_args;
+	// __asm volatile ("MOV %0, R1" : "=r" (svc_args));
+	// 	uint32_t task_psp = svc_args[3];
+		// for(int i = 0; i < 8; i++) {
+		// 	kprintf("svcarg[%d] = %x\n\r", i, svc_args[i]);
+	//uint32_t task_psp = task->psp;
+	//kprintf("%d\n",task_psp);
+	__asm volatile ("MOV R0, %0": :"r"(task_psp));
+	
+	//kprintf("ok\n");
+	__asm volatile ("LDMIA R0!,{R4-R11}");
+	//kprintf("ok\n");
+	__asm volatile ("MSR PSP, R0");
+	// __asm volatile ("MRS R1, CONTROL");
+	// __asm volatile ("ORRS R1, R1, #0x1"); //unprivileged
+	// __asm volatile ("MSR CONTROL, R1");
+	__asm volatile ("ISB 0xf":::"memory");
+	
+	
+	int x;
+	__asm volatile("mov %0, r0":"=r"(x):);
+	//kprintf("%d\n",x);
+	__asm volatile ("MOV LR, 0xFFFFFFFD");
+	//kprintf("isb\n");
+	__asm volatile ("BX LR");
+}
+
+//TODO callno
 void syscall(unsigned int *args)
 {
 	unsigned int svc_number;
 	svc_number = ((char *) args[6])[-2];
 /* The SVC_Handler calls this function to evaluate and execute the actual function */
 /* Take care of return value or code */
+	//kprintf("%d\n",svc_number);
 	switch(svc_number)
 	{
 		/* Write your code to call actual function (kunistd.h/c or times.h/c and handle the return value(s) */
@@ -60,6 +94,9 @@ void syscall(unsigned int *args)
 			{
 				unsigned int string_add = args[18];
 				char *ch = string_add;
+				// __asm volatile("push {lr}");
+				// kprintf("%s\n",ch);
+				// __asm volatile("pop {lr}");
 				__sys_write(STDOUT_FILENO, ch);
 				break;
 			}
@@ -67,9 +104,22 @@ void syscall(unsigned int *args)
 			__sys_reboot();
 			break;	
 		case SYS__exit:
+			TCB_TypeDef* task = args[16];
+			task->status = 4;
 			break;
 		case SYS_getpid:
+		{	
+			unsigned int pid_add = args[18];
+			
+			// for(int i=8;i<=24;i++)
+			// {
+			// 	TCB_TypeDef* stask = args[i];
+			// 	kprintf("task id %d for idx %d\n",stask->task_id,i);
+			// }
+			TCB_TypeDef* task = args[16];
+			__sys_getpid((unsigned int *)pid_add,task->task_id);
 			break;
+		}
 		case SYS___time:
 		{
 			unsigned int time_add = args[18];
@@ -78,7 +128,16 @@ void syscall(unsigned int *args)
 			break;
 		}
 		case SYS_yield:
-			break;				
+			SCB->ICSR |= (1 << 28);
+			break;	
+		case SYS_start_task:
+		{
+			unsigned int task = args[18];
+			//kprintf("%d\n",task);
+			__sys_start_task(task);
+			//kprintf("Back from start task\n");
+			break;
+		}		
 		/* return error code see error.h and errmsg.h ENOSYS sys_errlist[ENOSYS]*/	
 		default: ;
 	}

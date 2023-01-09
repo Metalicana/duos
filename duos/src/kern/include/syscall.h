@@ -31,6 +31,8 @@
 #ifndef _SYSCALL_H
 #define _SYSCALL_H
 #include <stdint.h>
+#include <types.h>
 void syscall(unsigned int *args);
+void __sys_start_task(uint32_t task_psp);
 #endif
 
