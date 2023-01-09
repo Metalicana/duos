@@ -38,7 +38,7 @@ void __sys_write(unsigned int fd, char *str)
     switch (fd)
     {
     case STDOUT_FILENO:
-        
+        //kprintf("before usart %s\n",str);
         _USART_WRITE(USART2, str);
         break;
     

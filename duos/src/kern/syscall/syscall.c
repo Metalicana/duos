@@ -84,7 +84,7 @@ void syscall(unsigned int *args)
 				//so that we can use the first char pointer as our string to write
 				__sys_read(0,&toRead);
 				//get arguments
-				unsigned int string_add = args[18];
+				unsigned int string_add = args[10];
 
 				*((char**)string_add) = toRead;
 				break;
@@ -92,8 +92,8 @@ void syscall(unsigned int *args)
 			
 		case SYS_write:
 			{
-				unsigned int string_add = args[18];
-				char *ch = string_add;
+				unsigned int string_add = args[10];
+				char *ch = (char*)string_add;
 				// __asm volatile("push {lr}");
 				// kprintf("%s\n",ch);
 				// __asm volatile("pop {lr}");
@@ -104,13 +104,19 @@ void syscall(unsigned int *args)
 			__sys_reboot();
 			break;	
 		case SYS__exit:
-			TCB_TypeDef* task = args[16];
+		{	TCB_TypeDef* task = args[16];
 			task->status = 4;
 			break;
+		}
 		case SYS_getpid:
 		{	
-			unsigned int pid_add = args[18];
+			unsigned int pid_add = args[10];
 			
+			// for(int i=8;i<=30;i++)
+			// {
+			// 	pid_add = args[i];
+			// 	kprintf("Pid i got %d for idx %d\n",pid_add,i);
+			// }
 			// for(int i=8;i<=24;i++)
 			// {
 			// 	TCB_TypeDef* stask = args[i];
@@ -122,14 +128,16 @@ void syscall(unsigned int *args)
 		}
 		case SYS___time:
 		{
-			unsigned int time_add = args[18];
+			unsigned int time_add = args[10];
 			__sys_gettime((unsigned int *)time_add);
 		
 			break;
 		}
 		case SYS_yield:
+		{	//this just triggers pendsv
 			SCB->ICSR |= (1 << 28);
 			break;	
+		}
 		case SYS_start_task:
 		{
 			unsigned int task = args[18];

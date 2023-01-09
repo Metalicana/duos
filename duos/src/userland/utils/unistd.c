@@ -47,7 +47,7 @@ void ok(char* args)
 
 void write(char* args)
 {
-    kprintf("%s\n",args);
+    //kprintf("%s\n",args);
     __asm volatile("mov r5, %[v]": : [v] "r" (args));
     __asm volatile("stmdb r13!, {r5}");
     __asm volatile (
@@ -104,6 +104,7 @@ void yeild(void)
 uint16_t getpid(void)
 {
     unsigned int pid = 0;
+    kprintf("original pid address %d\n",&pid);
     __asm volatile("mov r5, %[v]": : [v] "r" (&pid));
     __asm volatile("stmdb r13!, {r5}");
     __asm volatile (

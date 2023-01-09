@@ -76,8 +76,8 @@ void task_func(void) {
 			break;
 		}
 	}
-	while(1);
-	//exit();
+	//while(1);
+	exit();
 	// yield();
 }
 
@@ -103,8 +103,8 @@ void task_func2(void) {
 			break;
 		}
 	}
-	while(1);
-	//exit();
+	//while(1);
+	exit();
 	// yield();
 }
 
@@ -134,8 +134,8 @@ void task_func3(void) {
 			break;
 		}
 	}
-	while(1);
-	//exit();
+	//while(1);
+	exit();
 	// yield();
 }
 
@@ -187,7 +187,7 @@ void kmain(void)
 	// kprintf("\n\r\tall tasks done\n\r");
 
     
-    main();
+    //main();
 
 //uint32_t b=0;
 // float x=50.59;
